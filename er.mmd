@@ -1,0 +1,36 @@
+erDiagram
+    USER_TYPE ||--o{ USER : "has"
+    USER ||--o{ RESERVATION : "makes"
+    HOTEL ||--o{ RESERVATION : "is booked"
+    RESERVATION ||--o| PAYMENT : "has"
+
+    USER_TYPE {
+        bigint user_type_id PK
+        varchar user_type_name
+    }
+
+    USER {
+        bigint user_id PK
+        varchar user_name
+        bigint user_type_id FK
+    }
+
+    HOTEL {
+        bigint hotel_id PK
+        varchar hotel_name
+    }
+
+    RESERVATION {
+        bigint reservation_id PK
+        bigint user_id FK
+        bigint hotel_id FK
+        date check_in_date
+        date check_out_date
+    }
+
+    PAYMENT {
+        bigint payment_id PK
+        varchar payment_type
+        varchar payment_status
+        bigint reservation_id FK
+    }

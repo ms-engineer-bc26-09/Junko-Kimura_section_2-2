@@ -34,3 +34,35 @@ erDiagram
         varchar payment_status
         bigint reservation_id FK
     }
+
+
+erDiagram
+    USERS ||--o{ TWEETS : "投稿する"
+    USERS ||--o{ LIKES : "いいねする"
+    TWEETS ||--o{ LIKES : "いいねされる"
+    USERS ||--o{ FOLLOWS : "フォローする"
+    USERS ||--o{ FOLLOWS : "フォローされる"
+
+    USERS {
+        bigint user_id PK "呟いたユーザー番号"
+        varchar user_name "ユーザー名"
+        varchar email "ユーザーメールアドレス"
+    }
+
+    TWEETS {
+        bigint tweet_id PK "呟き番号"
+        bigint user_id FK "呟いたユーザー番号"
+        text content "呟き"
+        datetime tweeted_at "呟いた日時"
+    }
+
+    LIKES {
+        bigint tweet_id PK, FK "呟き番号"
+        bigint user_id PK, FK "呟いたユーザー番号"
+        datetime liked_at "いいね日時"
+    }
+
+    FOLLOWS {
+        bigint follower_user_id PK, FK "フォローするユーザー番号"
+        bigint followed_user_id PK, FK "フォローされたユーザー番号"
+    }    

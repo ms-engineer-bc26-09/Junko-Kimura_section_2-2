@@ -59,7 +59,7 @@ erDiagram
     LIKES {
         bigint tweet_id PK, FK "呟き番号"
         bigint user_id PK, FK "呟いたユーザー番号"
-        datetime liked_at "いいね日時"
+        timestamp liked_at "いいね日時"
     }
 
     FOLLOWS {
